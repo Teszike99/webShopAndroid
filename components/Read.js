@@ -1,9 +1,38 @@
+import * as React from 'react';
+import { View, Text } from 'react-native-web';
+import { NavigationContainer } from '@react-navigation/native';
+
+import Ionicons from 'react-native-vector-icons/Ionicons'
+
+//Screens
+import ReadScreen from './screens/ReadScreen';
+import CreateScreen from './screens/CreateScreen';
+
+// Screen names
+const readName = 'Read';
+const create = 'Create';
 
 export default function Read(){
     return (
-    <view>
-        <h1>goo</h1>
-    </view>
+        <NavigationContainer>
+            <Tab.Navigator
+            initialRouteName={readName} 
+            screenOption={({route}) => ({
+                tabBarIcon: ({focused, color, size}) => {
+                    let iconName;
+                    let rn = route.name;
+                    if (rn === readName){
+                        iconName = Focused ? 'home' : 'home-outline'
+                    } else if (rn === create) {
+                        iconName = focused ? 'settings' : 'settings-outline'
+                    }
+                    return <Ionicons name={iconName} size={size} color={color}></Ionicons>
+                },
+            })}>
+              <Tab.Screen name={homeName} component={HomeScreen}/>
+              
+                </Tab.Navigator>
+        </NavigationContainer>
     );
 }
 
