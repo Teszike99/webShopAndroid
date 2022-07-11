@@ -1,11 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { collection, doc, setDoc, addDoc, updateDoc } from "firebase/firestore"; 
+import {db} from './components/confit';
+import { useState } from 'react';
+
 
 export default function App() {
+  const [data, setData] = useState('')
+  function create(){
+    //submit data
+    updateDoc(doc(db, "products", "Rgu3SNG00cHeKUyMwTP6"), {
+      name: data,
+      descrypt: data,
+      quantity: 7
+    }).then(() => {
+      //Data saved succesfully!
+      console.log('data submitted')
+    })
+  }
+
   return (
     <View style={styles.container}>
       <Text>Hello wld$</Text>
-      <TextInput value='' placeholder="Username" style={styles.textBoxes}></TextInput>
+      <TextInput placeholder="data" onChangeText={(data) => {setData(data)}} style={styles.textBoxes}></TextInput>
+      <button onClick={create}>submit</button>
       <StatusBar style="auto" />
     </View>
   );
