@@ -4,44 +4,14 @@ import { collection, doc, setDoc, addDoc, updateDoc } from "firebase/firestore";
 import {db} from './components/confit';
 import { useState } from 'react';
 
+import Read from './components/Read'
 
 export default function App() {
-  const [data, setData] = useState('')
-  function create(){
-    //submit data
-    updateDoc(doc(db, "products", "Rgu3SNG00cHeKUyMwTP6"), {
-      name: data,
-      descrypt: data,
-      quantity: 7
-    }).then(() => {
-      //Data saved succesfully!
-      console.log('data submitted')
-    })
-  }
 
   return (
-    <View style={styles.container}>
-      <Text>Hello wld$</Text>
-      <TextInput placeholder="data" onChangeText={(data) => {setData(data)}} style={styles.textBoxes}></TextInput>
-      <button onClick={create}>submit</button>
-      <StatusBar style="auto" />
-    </View>
+    <view>
+         <Read/>
+    </view>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  textBoxes: {
-    width: '90%',
-    fontSize: 18,
-    padding: 12,
-    borderColor: 'gray',
-    borderWidth: 0.2,
-    borderRadius: 10
-  }
-});
