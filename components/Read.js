@@ -1,15 +1,36 @@
 import * as React from 'react';
 import { View, Text } from 'react-native-web';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { collection, doc, setDoc, addDoc} from "firebase/firestore"; 
+import {db} from './components/confit';
+import { useState } from 'react';
 
 export default function Read(){
+  
+        const [data, setData] = useState('')
+        function create(){
+          console.log(data)
+          //submit data
+          addDoc(collection(db, "products"), {
+            name: data,
+            descrypt: data,
+            quantity: 7
+          }).then(() => {
+            //Data saved succesfully!
+            console.log('data submitted')
+          })
+        
     return (
-     <View>
-        <Text>
-             
-        </Text>
-     </View>
+        <View style={styles.container}>
+        <Text>Hello wld$</Text>
+        <TextInput placeholder="data" onChangeText={(data) => {setData(data)}} style={styles.textBoxes}></TextInput>
+        <button onClick={create}>submit</button>
+        <StatusBar style="auto" />
+      </View>
     );
 }
+};
 
 
 
